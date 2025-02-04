@@ -1,0 +1,75 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->longText('content');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Explicitly reference 'categories'
+            $table->foreignId('created_by')->constrained('users')->onDelete('set null');
+            $table->foreignId('updated_by')->constrained('users')->onDelete('set null');
+            $table->string('image')->nullable();
+            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->timestamps(); // Created at and updated at timestamps
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('posts');
+    }
+};
+
+
+
+
+
+// categories
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id(); // Primary key
+            $table->string('name')->unique(); // Name of the category
+            $table->string('slug')->unique(); // URL-friendly version of the name
+            $table->text('description')->nullable(); // Description of the category
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade'); // Self-referencing foreign key
+            $table->enum('status', ['active', 'inactive', 'archived'])->default('active'); // Status field for category
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null'); // User who created the category
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null'); // User who last updated the category
+            $table->timestamps(); // Created and updated timestamps
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('categories');
+    }
+};
