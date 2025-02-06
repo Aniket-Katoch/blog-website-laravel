@@ -17,7 +17,7 @@
                     </div>
                     <div class="blog-post-content">
                         <div class="blog-post-title">
-                            <a href="{{ route('single-blog', ['id' => $post->id]) }}">{{ $post->title }}</a> <!-- Display post title -->
+                            <a href="{{ route('single-blog', ['slug' => $post->slug]) }}">{{ $post->title }}</a> <!-- Display post title -->
                         </div>
                         <div class="blog-post-meta">
                             <ul>
@@ -29,7 +29,7 @@
                             </ul>
                         </div>
                         <p>{{ Str::limit($post->body, 150) }}</p> <!-- Display a snippet of the post content -->
-                        <a href="{{ route('single-blog', ['id' => $post->id]) }}" class="blog-post-action">read more <i class="fa fa-angle-right"></i></a>
+                        <a href="{{ route('single-blog', ['slug' => $post->slug]) }}" class="blog-post-action">read more <i class="fa fa-angle-right"></i></a>
                     </div>
                 </article>
                 @endforeach

@@ -13,10 +13,10 @@
             </div>
             <div class="blog-post-content">
               <div class="blog-post-tag">
-                <a href="{{route('category', ['id' => $post->category_id])}}" class="text-uppercase"> {{$post->category->name}} </a>
+                <a href="{{route('category', ['slug' => $post->category->slug])}}" class="text-uppercase"> {{$post->category->name}} </a>
               </div>
               <div class="blog-post-title">
-                <a href="{{ route('single-blog', ['id' => $post->id]) }}">{{$post->title}}</a>
+                <a href="{{ route('single-blog', ['slug' => $post->slug]) }}">{{$post->title}}</a>
               </div>
               <div class="blog-post-meta">
                 <ul>
@@ -30,7 +30,7 @@
               <p>
                 {{ Str::limit($post->body, 150) }} <!-- Limit to 150 characters -->
             </p>
-              <a href="{{ route('single-blog', ['id' => $post->id]) }}" class="blog-post-action">read more <i class="fa fa-angle-right"></i></a>
+              <a href="{{ route('single-blog', ['slug' => $post->slug]) }}" class="blog-post-action">read more <i class="fa fa-angle-right"></i></a>
             </div>
           </article> 
           @endforeach
@@ -73,16 +73,16 @@
             
             <div class="latest-widget">
               <div class="latest-widget-thum">
-                <a href="{{ route('single-blog', ['id' => $post->id]) }}"">
+                <a href="{{ route('single-blog', ['slug' => $post->slug]) }}"">
                   <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 75px; background-color: {{ $post->image }};" alt="blog-thum"> <span class="text-uppercase font-weight-bold text-white" style="font-size: 1rem;">Image</span></div></a>
                 <div class="icon">
-                  <a href="{{ route('single-blog', ['id' => $post->id]) }}"">
+                  <a href="{{ route('single-blog', ['slug' => $post->slug]) }}"">
                     <img src="{{asset('frontendtemplate/images/blog/icon.svg')}}" alt="icon" /></a>
                 </div>
               </div>
               <div class="latest-widget-content">
                 <div class="content-title">
-                  <a href="{{ route('single-blog', ['id' => $post->id]) }}"">{{$post->title}}</a>
+                  <a href="{{ route('single-blog', ['slug' => $post->slug]) }}"">{{$post->title}}</a>
                 </div>
                 <div class="content-meta">
                   <ul>

@@ -20,7 +20,7 @@
         </div>
         <div class="col-lg-10 order-1 order-lg-2">
           <article class="single-blog">
-            <a href="{{route('category', ['id' => $post->category_id])}}" class="tag text-uppercase">{{$post->category->name}}</a>
+            <a href="{{route('category', ['slug' => $categorySlug])}}" class="tag text-uppercase">{{$post->category->name}}</a>
             <p class="title">{{$post->title}}</p>
             <ul class="meta">
               <li>By <a href="{{ route('about') }}">{{$post->user->name}}</a></li>

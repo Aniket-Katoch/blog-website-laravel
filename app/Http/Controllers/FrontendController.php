@@ -29,14 +29,16 @@ class FrontendController extends Controller
         return view("frontend.layouts.contact");
     }
 
-    public function showCategory($id)
+    public function showCategory($slug)
     {
-        // Retrieve the category with its posts and the user who created each post
-        $category = Category::with(['posts.user'])->findOrFail($id); // Use findOrFail to return 404 automatically if not found
-
+        // Retrieve the category by slug with its posts and the user who created each post
+        $category = Category::with(['posts.user'])
+                             ->where('slug', $slug)
+                             ->firstOrFail(); // Use firstOrFail to handle invalid slugs
+    
         // Get paginated posts related to the category
-        $posts = $category->posts()->paginate(5); // Paginate with 5 posts per page (you can adjust this)
-
+        $posts = $category->posts()->paginate(5); // Paginate with 5 posts per page (adjustable)
+    
         // Return the view with the category and paginated posts
         return view('frontend.layouts.category', compact('category', 'posts'));
     }

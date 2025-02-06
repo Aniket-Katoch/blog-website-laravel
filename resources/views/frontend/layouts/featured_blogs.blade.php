@@ -8,7 +8,7 @@
               <div class="featured-post-author">
                 <p>By <span>{{ $featuredBlog->user ? $featuredBlog->user->name : 'Unknown' }}</span></p>
               </div>
-              <a href="{{ route('single-blog', ['id' => $featuredBlog->id]) }}" class="featured-post-title">
+              <a href="{{ route('single-blog', ['slug' => $featuredBlog->slug]) }}" class="featured-post-title">
                 {{ $featuredBlog->title }}
               </a>
               <ul class="featured-post-meta">
